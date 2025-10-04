@@ -1,0 +1,356 @@
+{
+	"info": {
+		"_postman_id": "eed1b84c-35e8-4496-9128-69b292821ba3",
+		"name": "Book_Review_API_Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11362037"
+	},
+	"item": [
+		{
+			"name": "SignUp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Veeru",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "Veeru@321.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All_Books",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/books?page=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"books"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_Review",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGUwOTQ1MjE2NjFkMjgyNTIyZjE4ODEiLCJ1c2VyRW1haWwiOiJwaXl1c2hAdGVzdC5jb20iLCJpYXQiOjE3NTk1NzI1NzZ9.ro_TR1Vh8RowQtaSN4z41njS_nWyeUbTuCLw2JMB6CE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "bookId",
+							"value": "68e095681661d282522f188b",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "rating",
+							"value": "5",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "text",
+							"value": "Edited Text by piyush",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/reviews/68e0e307318839ff5e71ccd0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"reviews",
+						"68e0e307318839ff5e71ccd0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Submit_Review",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGUwOTQ1MjE2NjFkMjgyNTIyZjE4ODEiLCJ1c2VyRW1haWwiOiJwaXl1c2hAdGVzdC5jb20iLCJpYXQiOjE3NTk1NDg3OTR9.WVECpwXRcO8_Y0HAE27d-isgYG_DquRMHHzCQElomUU",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "book_id",
+							"value": "68e095681661d282522f188b",
+							"type": "text"
+						},
+						{
+							"key": "rating",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "text",
+							"value": "Review by tester",
+							"type": "text"
+						},
+						{
+							"key": "user_id",
+							"value": "68e094321661d282522f187e",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/reviews/createReview",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"reviews",
+						"createReview"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "Veeru@123.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit_Review",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGUwOTQzMjE2NjFkMjgyNTIyZjE4N2UiLCJ1c2VyRW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NTk1ODM2MTB9.wT4DxFOokp0iosH7BxS-GtGen6Vo9UOESGq2zHKk-KA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "rating",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "text",
+							"value": "Reviews is Edited",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/reviews/68e0e184318839ff5e71cc9e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"reviews",
+						"68e0e184318839ff5e71cc9e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_All_Review_By_Selected_BookId",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/reviews/68e0949a1661d282522f1885",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"reviews",
+						"68e0949a1661d282522f1885"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New_Book_Add",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGUwOTQzMjE2NjFkMjgyNTIyZjE4N2UiLCJ1c2VyRW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NTk1ODM2MTB9.wT4DxFOokp0iosH7BxS-GtGen6Vo9UOESGq2zHKk-KA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "To Kill a Mockingbird",
+							"type": "text"
+						},
+						{
+							"key": "author",
+							"value": "Harper Lee",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "A timeless classic set in the American South, it explores themes of racial injustice, moral growth, and compassion through the eyes of young Scout Finch.",
+							"type": "text"
+						},
+						{
+							"key": "genre",
+							"value": "Other",
+							"type": "text"
+						},
+						{
+							"key": "year",
+							"value": "1960",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/books/add-book",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"books",
+						"add-book"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
