@@ -23,14 +23,14 @@ export default function BookDetailsPage() {
 
   const hasReviewed = reviews.some(rev => rev.user_id._id === currUserId);
 
+  const [loadReview, setLoadReview] = useState(true);
 
   useEffect(() => {
-  const userId = sessionStorage.getItem("currUserId");
-  if (userId) {
-    setcurrUserId(userId);
-    console.log("Current User ID:", userId);
-  }
-}, []);
+    const userId = sessionStorage.getItem("currUserId");
+    if (userId) {
+      setcurrUserId(userId);
+    }
+  }, []);
 
 
   // get all the review of selected book
@@ -39,6 +39,7 @@ export default function BookDetailsPage() {
       try {
         const { data } = await API.get(`/reviews/${book._id}`);
         setReviews(data.reviews);
+        setLoadReview(false);
       }
       catch (err) {
         toast.error(err);
@@ -50,9 +51,11 @@ export default function BookDetailsPage() {
 
 
 
+
   // submit review
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
+
 
     if (!newReview.text || newReview.rating === 0) {
       toast.warning("Please enter text and rating!");
@@ -101,15 +104,17 @@ export default function BookDetailsPage() {
   // Submit edited review
   const handleEditReviewSubmit = async (e) => {
     e.preventDefault();
+    
     try {
+      setisEdit(false);
       const token = localStorage.getItem("Authorization");
       await API.put(
         `/reviews/${editingReviewId}`,
         newReview,
         { headers: { Authorization: token } }
       );
+      
       toast.success("Review updated!");
-      setisEdit(false);
 
       // Update review in state
       setReviews(
@@ -143,7 +148,6 @@ export default function BookDetailsPage() {
 
 
 
-
   return (
     <div className="max-w-4xl mx-auto px-4 py-10">
       {/* Book Info */}
@@ -160,8 +164,16 @@ export default function BookDetailsPage() {
 
 
 
-      {/* Edit Form */}
-      {isEdit && (
+      
+
+
+
+      {/* Reviews Section */}
+      <div className="bg-white shadow-xl rounded-2xl p-8">
+        <h2 className="text-2xl font-semibold mb-4">Reviews</h2>
+
+        {/* Edit Form */}
+        {isEdit && (
         <form onSubmit={handleEditReviewSubmit} className="mb-6 space-y-3">
           <div>
             <label className="block text-sm font-medium text-gray-600">
@@ -209,17 +221,13 @@ export default function BookDetailsPage() {
             </button>
           </div>
         </form>
-      )}
+         )}
 
 
-
-      {/* Reviews Section */}
-      <div className="bg-white shadow-xl rounded-2xl p-8">
-        <h2 className="text-2xl font-semibold mb-4">Reviews</h2>
 
         {/* Review Form */}
-        {!hasReviewed && (
-          <form onSubmit={handleReviewSubmit} className="mb-6 space-y-3">
+        {reviews.length > 0 && !hasReviewed &&
+          (<form onSubmit={handleReviewSubmit} className="mb-6 space-y-3">
             <div>
               <label className="block text-sm font-medium text-gray-600">
                 Your Rating
@@ -256,12 +264,30 @@ export default function BookDetailsPage() {
             >
               Submit Review
             </button>
-          </form>
-        )}
+          </form>)}
 
 
         {/* Review List */}
-        {reviews.length === 0 ? (
+        {loadReview ? (   // <-- add a loading state for reviews
+          // Skeleton Review Cards
+          Array.from({ length: 3 }).map((_, i) => (
+            <div key={i} className="border-b pb-3 animate-pulse">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="h-4 w-32 bg-gray-300 rounded mb-1"></div>
+                  <div className="h-3 w-24 bg-gray-200 rounded"></div>
+                </div>
+                <div className="flex space-x-1">
+                  {Array.from({ length: 5 }).map((_, j) => (
+                    <div key={j} className="h-4 w-4 bg-gray-300 rounded"></div>
+                  ))}
+                </div>
+              </div>
+              <div className="h-3 w-full bg-gray-200 rounded mt-2"></div>
+              <div className="h-3 w-2/3 bg-gray-200 rounded mt-1"></div>
+            </div>
+          ))
+        ) : reviews.length === 0 ? (
           <p className="text-gray-500">No reviews yet. Be the first to review!</p>
         ) : (
           reviews.map((rev) => (
@@ -304,7 +330,6 @@ export default function BookDetailsPage() {
             </div>
           ))
         )}
-
 
       </div>
     </div>
