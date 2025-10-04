@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
+import API from "../api"
+
 export default function AddBookPage() {
   const [formData, setFormData] = useState({
     title: "",
@@ -19,7 +21,7 @@ export default function AddBookPage() {
     e.preventDefault();
     try {
       let token = localStorage.getItem("Authorization");
-      const {data} = await axios.post("http://localhost:5000/api/books/add-book", formData, { headers: { Authorization: token } });
+      const {data} = await API.post("/books/add-book", formData, { headers: { Authorization: token } });
       toast.success(data.message || "Book Added.");
     }
     catch(err)
@@ -27,7 +29,7 @@ export default function AddBookPage() {
       if(err.response.status == 401)
         toast.error(err.response.data.message || "Already Exist");
       else
-        toast.error(err.response);
+        toast.error(err.response.data.message);
     }
 
   };

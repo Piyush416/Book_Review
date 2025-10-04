@@ -14,5 +14,5 @@ export const protect = async (req, res, next) => {
       res.status(401).json({ message: "Not authorized, token failed" });
     }
   }
-  if (!token) res.status(401).json({ message: "Login Require" });
+  if (!token) res.status(401).json({ message: "Log in to proceed" });
 };
